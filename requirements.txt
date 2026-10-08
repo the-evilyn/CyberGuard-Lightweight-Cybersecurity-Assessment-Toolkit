@@ -1,0 +1,7 @@
+# All tools use Python standard library only - no external packages needed!
+# Python 3.x required
+
+# Standard library modules used:
+# - hashlib (hash_generator.py)
+# - socket, threading (port_scanner.py)
+# - re (password_strength_checker.py)
