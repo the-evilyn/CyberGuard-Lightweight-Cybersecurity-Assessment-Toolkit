@@ -8,28 +8,40 @@ This document details the architectural principles, defensive security model, ri
 
 CyberGuard follows a layered, decoupled software architecture separating low-level security engines (`core/`) from high-level orchestrators (`modules/`) and output presentation engines (`reports/`).
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                       main.py (CLI)                         │
-└──────────────┬───────────────────────────────┬──────────────┘
-               │                               │
-               ▼                               ▼
-┌──────────────────────────────┐ ┌────────────────────────────┐
-│      Assessment Modules      │ │      Reporting Engine      │
-│  modules/port_scanner.py     │ │  reports/report_generator  │
-│  modules/password_checker.py │ └─────────────▲──────────────┘
-│  modules/hash_analyzer.py    │               │
-│  modules/file_integrity.py   │               │ (Findings)
-│  modules/log_analyzer.py     │ ──────────────┘
-└──────────────┬───────────────┘
-               │
-               ▼
-┌─────────────────────────────────────────────────────────────┐
-│                         Core Engines                        │
-│  core/scanner.py          core/password_analyzer.py         │
-│  core/hashing.py          core/risk_engine.py               │
-│  core/logger.py                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    CLI["main.py (CLI Interface)"]
+    
+    subgraph Modules["Defensive Assessment Modules"]
+        PS["Port Scanner<br/><code>modules/port_scanner.py</code>"]
+        PA["Password Analyzer<br/><code>modules/password_checker.py</code>"]
+        HA["Hash Analyzer<br/><code>modules/hash_analyzer.py</code>"]
+        FIM["File Integrity Monitor<br/><code>modules/file_integrity.py</code>"]
+        LA["Security Log Analyzer<br/><code>modules/log_analyzer.py</code>"]
+    end
+    
+    subgraph Core["Core Defensive Engines"]
+        SC["Network Scanner<br/><code>core/scanner.py</code>"]
+        PWA["Password Analyzer Core<br/><code>core/password_analyzer.py</code>"]
+        HC["Hashing Engine<br/><code>core/hashing.py</code>"]
+        LOG["Sanitized Logger<br/><code>core/logger.py</code>"]
+        RE["Risk Engine<br/><code>core/risk_engine.py</code>"]
+    end
+    
+    subgraph Output["Reporting Formats"]
+        REP["Report Generator<br/><code>reports/report_generator.py</code>"]
+        TERM["Terminal Output"]
+        JSON["Machine-Readable JSON"]
+        HTML["Responsive HTML Report"]
+    end
+    
+    CLI --> Modules
+    Modules --> Core
+    Modules --> RE
+    RE --> REP
+    REP --> TERM
+    REP --> JSON
+    REP --> HTML
 ```
 
 ### Architectural Principles:
