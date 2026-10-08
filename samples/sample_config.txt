@@ -1,0 +1,27 @@
+# CyberGuard Sample Configuration File
+# Defensive Security Hardening Settings
+
+[network]
+listen_interface = 127.0.0.1
+ssh_port = 22
+allow_root_ssh = false
+max_auth_tries = 3
+client_alive_interval = 300
+
+[tls]
+min_version = TLSv1.3
+ciphers = ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384
+hsts_enabled = true
+hsts_max_age = 31536000
+
+[passwords]
+min_length = 16
+require_special = true
+require_numbers = true
+max_lifetime_days = 90
+prevent_reuse_count = 5
+
+[logging]
+audit_level = VERBOSE
+retention_days = 180
+destination = /var/log/audit/cyberguard.log
