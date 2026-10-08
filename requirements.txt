@@ -1,7 +1,12 @@
-# All tools use Python standard library only - no external packages needed!
-# Python 3.x required
+# CyberGuard - Lightweight Cybersecurity Assessment Toolkit
+# Core runtime relies entirely on the Python Standard Library for minimal footprint and zero external bloat.
+#
+# Standard library modules utilized:
+# - socket, ipaddress, concurrent.futures (Network scanning & validation)
+# - hashlib, hmac (Cryptographic hashing & verification)
+# - secrets, math, re (Password entropy & cryptographically secure generation)
+# - json, pathlib, datetime (File integrity & reporting)
+# - logging, getpass, argparse (Auditing & secure CLI)
 
-# Standard library modules used:
-# - hashlib (hash_generator.py)
-# - socket, threading (port_scanner.py)
-# - re (password_strength_checker.py)
+# Development & Testing Dependencies:
+pytest>=8.0.0

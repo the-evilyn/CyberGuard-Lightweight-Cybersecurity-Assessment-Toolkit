@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cyberguard-toolkit"
+version = "1.0.0"
+description = "Lightweight Python Cybersecurity Assessment Toolkit for defensive security audits."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "the-evilyn" },
+    { name = "karansoni15-create (Original Base Project)" }
+]
+license = { text = "MIT" }
+keywords = [
+    "cybersecurity",
+    "security-scanner",
+    "port-scanner",
+    "password-analyzer",
+    "file-integrity",
+    "log-analyzer",
+    "defensive-security",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[project.scripts]
+cyberguard = "main:main"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+pythonpath = [
+    "."
+]
